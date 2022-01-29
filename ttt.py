@@ -77,69 +77,26 @@ class board:
     
     def win(self):
         self.update_board()
-        if self.board[0][0] == self.board[0][1] == self.board[0][2] != 0:
+        for i in range(3):
+            for j in range(3):
+                if self.board[i][j] == 0:
+                    return False
+        if self.board_state[0] == self.board_state[1] == self.board_state[2] or self.board_state[0] == self.board_state[4] == self.board_state[8]\
+            or self.board_state[0] == self.board_state[3] == self.board_state[6]:
                 print(self)
                 print("\n[center][green][bold]Game Over.\n")
-                if self.PlayerX_turn:
-                    print("[green]❌ wins!")
-                else:
-                    print("[green]⭕ wins!")
+                print(f"[green]{self.board_state[0]} wins!")
                 return True
-        if self.board[1][0] == self.board[1][1] == self.board[1][2] != 0:
+        if self.board_state[1] == self.board_state[4] == self.board_state[7] or self.board_state[3] == self.board_state[4] == self.board_state[5]\
+            or self.board_state[6] == self.board_state[4] == self.board_state[2]:
                 print(self)
                 print("\n[center][green][bold]Game Over.\n")
-                if self.PlayerX_turn:
-                    print("[green]❌ wins!")
-                else:
-                    print("[green]⭕ wins!")
+                print(f"[green]{self.board_state[4]} wins!")
                 return True
-        if self.board[2][0] == self.board[2][1] == self.board[2][2] != 0:
+        if self.board_state[2] == self.board_state[5] == self.board_state[8] or self.board_state[6] == self.board_state[7] == self.board_state[8]:
                 print(self)
                 print("\n[center][green][bold]Game Over.\n")
-                if self.PlayerX_turn:
-                    print("[green]❌ wins!")
-                else:
-                    print("[green]⭕ wins!")
-                return True
-        if self.board[0][0] == self.board[1][0] == self.board[2][0] != 0:
-                print(self)
-                print("\n[center][green][bold]Game Over.\n")
-                if self.PlayerX_turn:
-                    print("[green]❌ wins!")
-                else:
-                    print("[green]⭕ wins!")
-                return True
-        if self.board[0][1] == self.board[1][1] == self.board[2][1] != 0:
-                print(self)
-                print("\n[center][green][bold]Game Over.\n")
-                if self.PlayerX_turn:
-                    print("[green]❌ wins!")
-                else:
-                    print("[green]⭕ wins!")
-                return True
-        if self.board[0][2] == self.board[1][2] == self.board[2][2] != 0:
-                print(self)
-                print("\n[center][green][bold]Game Over.\n")
-                if self.PlayerX_turn:
-                    print("[green]❌ wins!")
-                else:
-                    print("[green]⭕ wins!")
-                return True
-        if self.board[0][0] == self.board[1][1] == self.board[2][2] != 0:
-                print(self)
-                print("\n[center][green][bold]Game Over.\n")
-                if self.PlayerX_turn:
-                    print("[green]❌ wins!")
-                else:
-                    print("[green]⭕ wins!")
-                return True
-        if self.board[0][2] == self.board[1][1] == self.board[2][0] != 0:
-                print(self)
-                print("\n[center][green][bold]Game Over.\n")
-                if self.PlayerX_turn:
-                    print("[green]❌ wins!")
-                else:
-                    print("[green]⭕ wins!")
+                print(f"[green]{self.board_state[8]} wins!")
                 return True
         return False                 
                
@@ -178,16 +135,19 @@ if __name__=='__main__':
             asyncio.run(board.mes())
             board.PlayerX_turn=not board.PlayerX_turn
         else:
-            cell=int(inp)
-            if cell>=0 and cell<=8 and board.board[cell//3][cell%3]==0:
-                if board.PlayerX_turn:
-                    board.board_state[cell]=board.board_state[cell]+"1"
-                    board.PlayerX_turn=False
-                else:
-                    board.board_state[cell]=board.board_state[cell]+"0"
-                    board.PlayerX_turn=True
+            if inp not in ['0','1','2','3','4','5','6','7','8']:
+                print('[red]Number must be between 0 and 8.')
             else:
-                print("[red]This cell is already marked.")
+                cell=int(inp)
+                if cell>=0 and cell<=8 and board.board[cell//3][cell%3]==0:
+                    if board.PlayerX_turn:
+                        board.board_state[cell]=board.board_state[cell]+"1"
+                        board.PlayerX_turn=False
+                    else:
+                        board.board_state[cell]=board.board_state[cell]+"0"
+                        board.PlayerX_turn=True
+                else:
+                    print("[red]This cell is already marked.")
 
         
     
