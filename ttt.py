@@ -1,4 +1,3 @@
-from typing import List
 from rich.console import Console, ConsoleOptions, RenderResult
 from rich.table import Table
 from rich import print
@@ -7,7 +6,13 @@ from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, transpile
 from qiskit.providers.aer import QasmSimulator
 from qiskit.compiler import assemble
 import asyncio
-backend = QasmSimulator()
+from azure.quantum.qiskit import AzureQuantumProvider
+provider = AzureQuantumProvider (
+    resource_id = "/subscriptions/b1d7f7f8-743f-458e-b3a0-3e09734d716d/resourceGroups/aq-hackathons/providers/Microsoft.Quantum/Workspaces/aq-hackathon-01",
+    location = "eastus"
+)
+print([backend.name() for backend in provider.backends()])
+backend = provider.get_backend('ionq.simulator')
 
 
 
@@ -44,9 +49,12 @@ class board:
                 qc.h(qr[0])
         qc.measure(qr, cr)
         #print(qc.draw(output='text'))
-        qc_compiled = transpile(qc, backend)
-        qc_compiled=assemble(qc)
-        job = backend.run(qc_compiled, shots=1)
+        # qc_compiled = transpile(qc, backend)
+        # qc_compiled=assemble(qc)
+        # job = backend.run(qc_compiled, shots=1)
+        job = backend.run(qc, shots=1)
+        job_id = job.id()
+        print(f'\nJob id: {job_id}')
         result = job.result()
         counts = result.get_counts(qc)
         #print(counts)
