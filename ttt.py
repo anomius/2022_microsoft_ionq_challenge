@@ -43,19 +43,19 @@ class board:
             elif i=='0':
                 qc.h(qr[0])
         qc.measure(qr, cr)
-        print(qc.draw(output='text'))
+        #print(qc.draw(output='text'))
         qc_compiled = transpile(qc, backend)
         qc_compiled=assemble(qc)
         job = backend.run(qc_compiled, shots=1)
         result = job.result()
         counts = result.get_counts(qc)
-        print(counts)
-        if '0'in counts.keys():
+        #print(counts)
+        if '1'in counts.keys():
             self.board_state[key]="⭕"
-            print("⭕")
+        #    print("⭕")
         else:
             self.board_state[key]="❌"
-            print("❌")
+        #    print("❌")
 
     def update_board(self):
         for i in range(3):
@@ -70,6 +70,62 @@ class board:
     def win(self):
         self.update_board()
         if self.board[0][0] == self.board[0][1] == self.board[0][2] != 0:
+                print(self)
+                print("\n[center][green][bold]Game Over.\n")
+                if self.PlayerX_turn:
+                    print("[green]❌ wins!")
+                else:
+                    print("[green]⭕ wins!")
+                return True
+        if self.board[1][0] == self.board[1][1] == self.board[1][2] != 0:
+                print(self)
+                print("\n[center][green][bold]Game Over.\n")
+                if self.PlayerX_turn:
+                    print("[green]❌ wins!")
+                else:
+                    print("[green]⭕ wins!")
+                return True
+        if self.board[2][0] == self.board[2][1] == self.board[2][2] != 0:
+                print(self)
+                print("\n[center][green][bold]Game Over.\n")
+                if self.PlayerX_turn:
+                    print("[green]❌ wins!")
+                else:
+                    print("[green]⭕ wins!")
+                return True
+        if self.board[0][0] == self.board[1][0] == self.board[2][0] != 0:
+                print(self)
+                print("\n[center][green][bold]Game Over.\n")
+                if self.PlayerX_turn:
+                    print("[green]❌ wins!")
+                else:
+                    print("[green]⭕ wins!")
+                return True
+        if self.board[0][1] == self.board[1][1] == self.board[2][1] != 0:
+                print(self)
+                print("\n[center][green][bold]Game Over.\n")
+                if self.PlayerX_turn:
+                    print("[green]❌ wins!")
+                else:
+                    print("[green]⭕ wins!")
+                return True
+        if self.board[0][2] == self.board[1][2] == self.board[2][2] != 0:
+                print(self)
+                print("\n[center][green][bold]Game Over.\n")
+                if self.PlayerX_turn:
+                    print("[green]❌ wins!")
+                else:
+                    print("[green]⭕ wins!")
+                return True
+        if self.board[0][0] == self.board[1][1] == self.board[2][2] != 0:
+                print(self)
+                print("\n[center][green][bold]Game Over.\n")
+                if self.PlayerX_turn:
+                    print("[green]❌ wins!")
+                else:
+                    print("[green]⭕ wins!")
+                return True
+        if self.board[0][2] == self.board[1][1] == self.board[2][0] != 0:
                 print(self)
                 print("\n[center][green][bold]Game Over.\n")
                 if self.PlayerX_turn:
