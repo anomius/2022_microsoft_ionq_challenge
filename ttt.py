@@ -18,15 +18,14 @@ print([backend.name() for backend in provider.backends()])
 backend = provider.get_backend('ionq.simulator')
 
 
-
 class board:
     def __init__(self) -> None:
         self.board=[
-                    [0, 0, 0],
-                    [0, 0, 0],
-                    [0, 0, 0]
-                    ]
-        self.PlayerX_turn=True
+            [0, 0, 0],
+            [0, 0, 0],
+            [0, 0, 0]
+        ]
+        self.PlayerX_turn = True
         self.board_state={
             0: ' ',
             1: ' ',
@@ -132,6 +131,18 @@ if __name__=='__main__':
     print("5. When a player wants to use the current state\n   of the board to get results, they can measure it\n   with 'm'.")
     print("6. Have fun!\n")
     input("Press enter to continue...")
+    print("\n")
+
+    backend_choice = None
+    while not backend_choice:
+        backend_choice = input("Please choose a quantum backend (1) for simulator, (2) for qpu: ")
+        if backend_choice == '1':
+            backend = provider.get_backend('ionq.simulator')
+        elif backend_choice == '2':
+            backend = provider.get_backend('ionq.qpu')
+        else:
+            backend_choice = None
+    
     print("\n\n\n\n")
 
     while not board.win():
@@ -140,7 +151,7 @@ if __name__=='__main__':
         else:
             print("[red]⭕ turn")
         print(board)
-        inp = input("\n[green]Enter the number of the cell you want to mark or m to measure: ")
+        inp = input("\n[green]Enter the number of the cell you want to mark or 'm' to measure: ")
         if inp=="m":
             asyncio.run(board.mes())
             board.PlayerX_turn = not board.PlayerX_turn
@@ -148,14 +159,14 @@ if __name__=='__main__':
             if inp not in ['0','1','2','3','4','5','6','7','8']:
                 print('[red]Number must be between 0 and 8.')
             else:
-                cell=int(inp)
+                cell = int(inp)
                 if cell >= 0 and cell <= 8 and board.board[cell // 3][cell % 3] == 0:
                     if board.PlayerX_turn:
                         board.board_state[cell] = board.board_state[cell] + "1"
-                        board.PlayerX_turn=False
+                        board.PlayerX_turn = False
                     else:
                         board.board_state[cell] = board.board_state[cell] + "0"
-                        board.PlayerX_turn=True
+                        board.PlayerX_turn = True
                 else:
                     print("[red]This cell is already marked.")
 
