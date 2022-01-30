@@ -2,7 +2,7 @@ from rich.console import Console, ConsoleOptions, RenderResult
 from rich.table import Table
 from rich import print
 from rich import box
-from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, transpile
+from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, transpile, Aer, execute
 from qiskit.providers.aer import QasmSimulator
 from qiskit.compiler import assemble
 import asyncio
@@ -38,11 +38,11 @@ class board:
             7: ' ',
             8: ' ',
         }
-        self.qr = QuantumRegister(9)
-        self.cr = ClassicalRegister(9)
 
     async def q_measure(self):
-        qc = QuantumCircuit(self.qr, self.cr)
+        qr = QuantumRegister(9)
+        cr = ClassicalRegister(9)
+        qc = QuantumCircuit(qr, cr)
 
         temp_board = self.board_state
         while sum([len(cell_val) for cell_val in temp_board.values()]) > 0:
@@ -53,10 +53,10 @@ class board:
                     if e >= len(temp_board[i]) or temp_board[i][0] == '(':
                         break
                     elif temp_board[i][0] == '1':
-                        qc.x(self.qr[i])
-                        qc.h(self.qr[i])
-                    elif i == '0':
-                        qc.h(self.qr[i])
+                        qc.x(qr[i])
+                        qc.h(qr[i])
+                    elif temp_board[i][0] == '0':
+                        qc.h(qr[i])
                     temp_board[i] = temp_board[i][1:]
             
             # Apply CX Gate
@@ -67,22 +67,13 @@ class board:
                     if temp_board[i][:3] == '(CX':
                         cell0 = int(temp_board[i][3])
                         cell1 = int(temp_board[i][4])
-                        qc.cx(self.qr[cell0], self.qr[cell1])
+                        qc.cx(qr[cell0], qr[cell1])
                         temp_board[cell0] = temp_board[i][6:]
                         temp_board[cell1] = temp_board[i][6:]
 
-        qc.measure(range(9), range(9))
+        qc.measure(qr, cr)
 
         print('\n', qc.draw(), '\n')
-
-        # for i in state:
-        #     if i =='1':
-        #         qc.x(qr[0])
-        #         qc.h(qr[0])
-        
-        #     elif i=='0':
-        #         qc.h(qr[0])
-        # qc.measure(qr, cr)
 
         job = backend.run(qc, shots=128)
         job_id = job.id()
@@ -123,18 +114,18 @@ class board:
             or self.board_state[0] == self.board_state[3] == self.board_state[6]:
                 print(self)
                 print("\n[center][green][bold]Game Over.\n")
-                print(f"[green]{self.board_state[0]} wins!")
+                print(f"[green]{self.board_state[0]} WINS!")
                 return True
         if self.board_state[1] == self.board_state[4] == self.board_state[7] or self.board_state[3] == self.board_state[4] == self.board_state[5]\
             or self.board_state[6] == self.board_state[4] == self.board_state[2]:
                 print(self)
                 print("\n[center][green][bold]Game Over.\n")
-                print(f"[green]{self.board_state[4]} wins!")
+                print(f"[green]{self.board_state[4]} WINS!")
                 return True
         if self.board_state[2] == self.board_state[5] == self.board_state[8] or self.board_state[6] == self.board_state[7] == self.board_state[8]:
                 print(self)
                 print("\n[center][green][bold]Game Over.\n")
-                print(f"[green]{self.board_state[8]} wins!")
+                print(f"[green]{self.board_state[8]} WINS!")
                 return True
         return False                 
                
