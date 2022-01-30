@@ -26,7 +26,7 @@ Our qubit tic tac toe is the extension of Schoridnger’s cat — but instead of
    CX (first cell) (second cell). eg CX(4)(5).
 5. When a player wants to use the current state
    of the board to get results, they can measure it
-   with 'm'. Warning: only play this when you think you'll win!
+   with 'm'. Warning: only play this if you think you'll win!
 6. Have fun!
 
 ### <u>How to win</u>
