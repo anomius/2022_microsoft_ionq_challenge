@@ -43,8 +43,11 @@ When a measurement occurs, the one with a win state in classical tic tac toe win
 ```
 
 ### Sample Runthrough
-
-
+![output1](https://user-images.githubusercontent.com/98439884/151698210-b056e381-efc5-45c0-8050-2ac67d797072.jpg)
+![output2](https://user-images.githubusercontent.com/98439884/151698223-23ecd482-aa39-4204-86fa-f82983f386e8.jpg)
+![output3](https://user-images.githubusercontent.com/98439884/151698233-06060373-ab7d-4ff9-9b31-27db4562fe03.jpg)
+![output4](https://user-images.githubusercontent.com/98439884/151698239-353c9e60-e4b6-4f98-90d4-f40117abe4f7.jpg)
+![output5](https://user-images.githubusercontent.com/98439884/151698242-9c9e1a85-64d1-4634-9a06-f96d14f4fe17.jpg)
 
 ### Bibliography
 ----------------------------------------------------
