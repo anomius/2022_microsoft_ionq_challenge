@@ -122,14 +122,23 @@ class board:
 
 if __name__=='__main__':
     board = board()
-
+    board_str="""
+            ┌───┬───┬───┐
+            │ 0 │ 1 │ 2 │
+            ├───┼───┼───┤
+            │ 3 │ 4 │ 5 │
+            ├───┼───┼───┤
+            │ 6 │ 7 │ 8 │
+            └───┴───┴───┘
+            """
     print("[bold italic black on yellow blink]Welcome to Tic Tac Toe!\n")
     print("[bold italic green]Instructions:")
     print("1. X's turn applies an X and H gate on the\n   position.")
     print("2. O's turn applies a H gate on the position.")
+    print(board_str)
     print("3. Select the cell to take your turn (0-8). A '1'\n   will be placed for X's turn and a '0' for O's\n   turn.")
     print("4. Players may take their turn on existing cells\n   to change its state.")
-    print("5. When a player wants to use the current state\n   of the board to get results, they can measure it\n   with 'm'.")
+    print("5. When a player wants to use the current state\n   of the board to get results, they can measure it\n   with [blod]'m'[/].")
     print("6. Have fun!\n")
     input("Press enter to continue...")
     print("\n\n\n\n")
