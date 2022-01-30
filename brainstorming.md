@@ -53,4 +53,4 @@ When a measurement occurs, the one with a win state in classical tic tac toe win
 ----------------------------------------------------
 
 1) https://medium.com/@toohonlin/develop-quantum-mechanics-intuition-through-quantum-game-qubit-tic-tac-toe-d9814bc927dc
-2) 
+2) https://www.researchgate.net/publication/338113536_Quantum_Tic-Tac-Toe_A_Hybrid_of_Quantum_and_Classical_Computing
