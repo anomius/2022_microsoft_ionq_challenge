@@ -226,6 +226,3 @@ if __name__=='__main__':
                 print("[red]This cell is already marked.")
         else:
             print('[red]Invalid Input.')
-
-        
-    
