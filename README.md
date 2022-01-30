@@ -63,7 +63,7 @@ cd 2022_microsoft_ionq_challenge
 ```
 
 ## Motivation
-Eveyone now and then likes to have some time to relax. What better way to do this by playing a childhood classic — tic tac toe. However, with a slight quantum twist. Since quantum computing is still in an early stage of development, we wanted to be able to find the best game possible to use the IonQ quantum computer. Will you be able to achieve victory in this quantumized tic tac toe?
+Eveyone now and then,one likes to have some time to relax. What better way to do this by playing a childhood classic — Tic Tac Toe. However, with a slight quantum twist. Since quantum computing is still in an early stage of development, we wanted to be able to find the best game possible to use the IonQ quantum computer. Will you be able to achieve victory in this quantumized tic tac toe?
 
 ## Gameplay
 In the beginning, there are two players: X's and O's. Each player takes a turn deciding from one of the three possible moves:
