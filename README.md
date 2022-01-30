@@ -1,4 +1,4 @@
-# Welcome to IonQ + Microsoft Joint Challenge @ MIT iQuHACK 2022!# Quantum Tic Tac Toe
+# Welcome to IonQ + Microsoft Joint Challenge @ MIT iQuHACK 2022! #QuantumTicTacToe
 
 ![](Assets/Header.jpg)
 
@@ -69,6 +69,6 @@ cd 2022_microsoft_ionq_challenge
 2) https://www.researchgate.net/publication/338113536_Quantum_Tic-Tac-Toe_A_Hybrid_of_Quantum_and_Classical_Computing
 
 ### Team Experience at iQuHACK 2022
-Our experience as a team at the Interdisciplinary Quantum Hackathon 2022 by MIT has been a great learning experience. The expert sessions with industry specialists and leading researchers was motivating and enlightening. The hackathon has given us an extremley great platform to exercise our knowledge in the field of quantum computation and programming to work on something unique and fun filled. We are extremely grateful for opportunity given and are utmost sure that this hackathon has motivated us to contribute our time and effort as a part of the quantum workforce.
+Our experience as a team at the Interdisciplinary Quantum Hackathon 2022 by MIT has been a great learning experience. Through the expert sessions and talks with industry specials and leading researchers, we became even more motivated and enlightened. This hackathon has given us an wonderful platform to exercise our knowledge in the field of quantum computation and computer programming to work on something unique, fulfilling, and fun. We are extremely grateful for opportunity given by the iQuHack Staff and are utmost sure that this hackathon has motivated us to contribute our time and effort as a part of the future quantum workforce.
 
 ## Link to the presentation:
