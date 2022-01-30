@@ -1,4 +1,4 @@
-# Qunatum Tic Tac Toe
+# Quantum Tic Tac Toe
 
 The game we will be quantizing today is none other than the infamous tic tac toe!“Quantizing” a game simply means introducing quantum effect into the game. 
 For those who have never heard of it, Tic tac toe is a 2-player strategy game, where players take turns to place their marking(either “O” or “X”) on a 3x3 board. The goal is to form a straight line from 3 markings.
