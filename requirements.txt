@@ -1,4 +1,4 @@
 rich
 qiskit
 azure
-azure-qunatum
+azure-quantum
