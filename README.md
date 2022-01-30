@@ -72,4 +72,4 @@ cd 2022_microsoft_ionq_challenge
 ### Team Experience at iQuHACK 2022
 Our experience as a team at the Interdisciplinary Quantum Hackathon 2022 by MIT has been a great learning experience. The expert sessions with industry specialists and leading researchers was motivating and enlightening. The hackathon has given us an extremley great platform to exercise our knowledge in the field of quantum computation and programming to work on something unique and fun filled. We are extremely grateful for opportunity given and are utmost sure that this hackathon has motivated us to contribute our time and effort as a part of the quantum workforce.
 
-## Link To the presentaion:
+## Link to the presentation:
