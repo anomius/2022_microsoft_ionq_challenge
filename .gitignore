@@ -8,6 +8,8 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+.obsidian/
+.vscode/
 build/
 develop-eggs/
 dist/

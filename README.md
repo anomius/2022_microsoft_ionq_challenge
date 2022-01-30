@@ -48,6 +48,7 @@ When a measurement occurs, the one with a win state in classical tic tac toe win
 └───┴───┴───┘
 ```
 
+
 ### Sample Runthrough
 ![output1](https://user-images.githubusercontent.com/98439884/151698210-b056e381-efc5-45c0-8050-2ac67d797072.jpg)
 ![output2](https://user-images.githubusercontent.com/98439884/151698223-23ecd482-aa39-4204-86fa-f82983f386e8.jpg)
@@ -55,8 +56,18 @@ When a measurement occurs, the one with a win state in classical tic tac toe win
 ![output4](https://user-images.githubusercontent.com/98439884/151698239-353c9e60-e4b6-4f98-90d4-f40117abe4f7.jpg)
 ![output5](https://user-images.githubusercontent.com/98439884/151698242-9c9e1a85-64d1-4634-9a06-f96d14f4fe17.jpg)
 
+
+``` bash
+git clone https://github.com/RoyalWeden/2022_microsoft_ionq_challenge.git
+cd 2022_microsoft_ionq_challenge
+./setup.sh
+```
+
 ### Bibliography
 ----------------------------------------------------
 
 1) https://medium.com/@toohonlin/develop-quantum-mechanics-intuition-through-quantum-game-qubit-tic-tac-toe-d9814bc927dc
 2) https://www.researchgate.net/publication/338113536_Quantum_Tic-Tac-Toe_A_Hybrid_of_Quantum_and_Classical_Computing
+
+
+## Link To the presentaion:
