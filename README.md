@@ -62,13 +62,6 @@ cd 2022_microsoft_ionq_challenge
 ./setup.sh
 ```
 
-## Bibliography
-----------------------------------------------------
-
-1) https://medium.com/@toohonlin/develop-quantum-mechanics-intuition-through-quantum-game-qubit-tic-tac-toe-d9814bc927dc
-2) https://www.researchgate.net/publication/338113536_Quantum_Tic-Tac-Toe_A_Hybrid_of_Quantum_and_Classical_Computing
-
-
 ## Motivation
 Eveyone now and then likes to have some time to relax. What better way to do this by playing a childhood classic — tic tac toe. However, with a slight quantum twist. Since quantum computing is still in an early stage of development, we wanted to be able to find the best game possible to use the IonQ quantum computer. Will you be able to achieve victory in this quantumized tic tac toe?
 
@@ -89,3 +82,11 @@ Let us take 3 rounds, for example, however, in a normal game, the game board wil
 Our experience as a team at the Interdisciplinary Quantum Hackathon 2022 by MIT has been a great learning experience. Through the expert sessions and talks with industry specials and leading researchers, we became even more motivated and enlightened. This hackathon has given us an wonderful platform to exercise our knowledge in the field of quantum computation and computer programming to work on something unique, fulfilling, and fun. We are extremely grateful for opportunity given by the iQuHack Staff and are utmost sure that this hackathon has motivated us to contribute our time and effort as a part of the future quantum workforce.
 
 ## Link to the presentation:
+https://www.canva.com/design/DAE27cvEZ1w/hfnhZ23s4G40aQMkOKCVGw/view?utm_content=DAE27cvEZ1w&utm_campaign=designshare&utm_medium=link&utm_source=sharebutton
+
+
+## Bibliography
+----------------------------------------------------
+
+1) https://medium.com/@toohonlin/develop-quantum-mechanics-intuition-through-quantum-game-qubit-tic-tac-toe-d9814bc927dc
+2) https://www.researchgate.net/publication/338113536_Quantum_Tic-Tac-Toe_A_Hybrid_of_Quantum_and_Classical_Computing
