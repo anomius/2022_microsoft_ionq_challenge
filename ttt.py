@@ -2,7 +2,7 @@ from rich.console import Console, ConsoleOptions, RenderResult
 from rich.table import Table
 from rich import print
 from rich import box
-from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, transpile
+from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, transpile, Aer, execute
 from qiskit.providers.aer import QasmSimulator
 from qiskit.compiler import assemble
 import asyncio
@@ -18,15 +18,15 @@ print([backend.name() for backend in provider.backends()])
 backend = provider.get_backend('ionq.simulator')
 
 
-
 class board:
     def __init__(self) -> None:
         self.board=[
-                    [0, 0, 0],
-                    [0, 0, 0],
-                    [0, 0, 0]
-                    ]
-        self.PlayerX_turn=True
+            [0, 0, 0],
+            [0, 0, 0],
+            [0, 0, 0]
+        ]
+
+        self.PlayerX_turn = True
         self.board_state={
             0: ' ',
             1: ' ',
@@ -39,30 +39,59 @@ class board:
             8: ' ',
         }
 
-    async def q_measure(self,state,key):
-        qr = QuantumRegister(1)
-        cr = ClassicalRegister(1)
+    async def q_measure(self):
+        qr = QuantumRegister(9)
+        cr = ClassicalRegister(9)
         qc = QuantumCircuit(qr, cr)
 
-        for i in state:
-            if i =='1':
-                qc.x(qr[0])
-                qc.h(qr[0])
-        
-            elif i=='0':
-                qc.h(qr[0])
+        temp_board = self.board_state
+        while sum([len(cell_val) for cell_val in temp_board.values()]) > 0:
+            # Apply H and X gates
+            for i in range(9):
+                cell_length = len(temp_board[i])
+                for e in range(cell_length):
+                    if e >= len(temp_board[i]) or temp_board[i][0] == '(':
+                        break
+                    elif temp_board[i][0] == '1':
+                        qc.x(qr[i])
+                        qc.h(qr[i])
+                    elif temp_board[i][0] == '0':
+                        qc.h(qr[i])
+                    temp_board[i] = temp_board[i][1:]
+            
+            # Apply CX Gate
+            for i in range(9):
+                if len(temp_board[i]) == 0:
+                    continue
+                else:
+                    if temp_board[i][:3] == '(CX':
+                        cell0 = int(temp_board[i][3])
+                        cell1 = int(temp_board[i][4])
+                        qc.cx(qr[cell0], qr[cell1])
+                        temp_board[cell0] = temp_board[i][6:]
+                        temp_board[cell1] = temp_board[i][6:]
+
         qc.measure(qr, cr)
+
+        print('\n', qc.draw(), '\n')
 
         job = backend.run(qc, shots=128)
         job_id = job.id()
         print(f'\nJob id: {job_id}')
         result = job.result()
-        counts = result.get_counts(qc)
+        counts = result.get_counts()
+        sorted_counts = sorted(counts.items(), key=lambda x: x[1], reverse=True)
+        top_count = sorted_counts[0][0][::-1]
 
-        if '1'in counts.keys():
-            self.board_state[key] = "⭕"
-        else:
-            self.board_state[key] = "❌"
+        for i in range(9):
+            if top_count[i] == '1':
+                self.board_state[i] = "⭕"
+            else:
+                self.board_state[i] = "❌"
+        # if '1' in counts.keys():
+        #     self.board_state[key] = "⭕"
+        # else:
+        #     self.board_state[key] = "❌"
 
     def update_board(self):
         for i in range(3):
@@ -85,31 +114,37 @@ class board:
             or self.board_state[0] == self.board_state[3] == self.board_state[6]:
                 print(self)
                 print("\n[center][green][bold]Game Over.\n")
-                print(f"[green]{self.board_state[0]} wins!")
+                print(f"[green]{self.board_state[0]} WINS!")
                 return True
         if self.board_state[1] == self.board_state[4] == self.board_state[7] or self.board_state[3] == self.board_state[4] == self.board_state[5]\
             or self.board_state[6] == self.board_state[4] == self.board_state[2]:
                 print(self)
                 print("\n[center][green][bold]Game Over.\n")
-                print(f"[green]{self.board_state[4]} wins!")
+                print(f"[green]{self.board_state[4]} WINS!")
                 return True
         if self.board_state[2] == self.board_state[5] == self.board_state[8] or self.board_state[6] == self.board_state[7] == self.board_state[8]:
                 print(self)
                 print("\n[center][green][bold]Game Over.\n")
-                print(f"[green]{self.board_state[8]} wins!")
+                print(f"[green]{self.board_state[8]} WINS!")
                 return True
         return False                 
                
     async def mes(self):
         for i in range(3):
             for j in range(3):
-                if self.board[i][j]==0 and self.board_state[i * 3 + j]!=" ":
-                    await self.q_measure(self.board_state[i * 3 + j],i * 3 + j)
-                    self.update_board()
+                if not (self.board[i][j] == 0 and self.board_state[i * 3 + j] != " "):
+                    return
+        await self.q_measure()
+        self.update_board()
+        # for i in range(3):
+        #     for j in range(3):
+        #         if self.board[i][j]==0 and self.board_state[i * 3 + j]!=" ":
+        #             await self.q_measure(self.board_state[i * 3 + j],i * 3 + j)
+        #             self.update_board()
 
 
     def __rich_console__(self, console: Console, options: ConsoleOptions) -> RenderResult:
-        table = Table(title="[green]Board",show_header=False,show_lines=True,border_style=None,box=box.ROUNDED)
+        table = Table(title="[green]Board", show_header=False, show_lines=True, border_style=None, box=box.ROUNDED)
         table.add_column(justify="center")
         table.add_column(justify="center")
         table.add_column(justify="center")
@@ -141,32 +176,61 @@ if __name__=='__main__':
     print("5. When a player wants to use the current state\n   of the board to get results, they can measure it\n   with [blod]'m'[/].")
     print("6. Have fun!\n")
     input("Press enter to continue...")
+    print("\n")
+
+    backend_choice = None
+    while not backend_choice:
+        backend_choice_text = " Please choose a quantum backend (1) for simulator, (2) for qpu: "
+        print(f"[green]{backend_choice_text}")
+        backend_choice = input(f"\033[1A \033[{len(backend_choice_text) - 1}C")
+        if backend_choice == '1':
+            backend = provider.get_backend('ionq.simulator')
+        elif backend_choice == '2':
+            backend = provider.get_backend('ionq.qpu')
+        else:
+            backend_choice = None
+    
     print("\n\n\n\n")
 
     while not board.win():
+        print('\n')
         if board.PlayerX_turn:
-            print("[green]❌ turn")
+            print("[bold red]TURN: ❌")
         else:
-            print("[red]⭕ turn")
+            print("[bold red]TURN: ⭕")
         print(board)
-        inp = input("\n[green]Enter the number of the cell you want to mark or m to measure: ")
-        if inp=="m":
+
+        turn_text = " Enter the number of the cell you want to mark or 'CX (cell 1) (cell 2)' to entangle or 'M' to measure: "
+        print(f"\n[green]{turn_text}")
+        inp = input(f"\033[1A \033[{len(turn_text) - 1}C")
+        if inp.lower() == "m":
             asyncio.run(board.mes())
             board.PlayerX_turn = not board.PlayerX_turn
-        else:
-            if inp not in ['0','1','2','3','4','5','6','7','8']:
-                print('[red]Number must be between 0 and 8.')
+        elif inp[0:2].lower() == "cx":
+            inp_left = inp[3:]
+            if len(inp_left) < 3:
+                print('[red]Entanglement needs 2 specified cells.')
             else:
-                cell=int(inp)
-                if cell >= 0 and cell <= 8 and board.board[cell // 3][cell % 3] == 0:
-                    if board.PlayerX_turn:
-                        board.board_state[cell] = board.board_state[cell] + "1"
-                        board.PlayerX_turn=False
-                    else:
-                        board.board_state[cell] = board.board_state[cell] + "0"
-                        board.PlayerX_turn=True
+                cell0 = inp_left[0]
+                cell1 = inp_left[2]
+                if cell0 not in ['0','1','2','3','4','5','6','7','8'] or cell1 not in ['0','1','2','3','4','5','6','7','8']:
+                    print('[red]Cells must be 0-8.')
                 else:
-                    print("[red]This cell is already marked.")
-
-        
-    
+                    cell0 = int(cell0)
+                    cell1 = int(cell1)
+                    board.board_state[cell0] += f"(CX{cell0}{cell1})"
+                    board.board_state[cell1] += f"(CX{cell0}{cell1})"
+                    board.PlayerX_turn = not board.PlayerX_turn
+        elif inp in ['0','1','2','3','4','5','6','7','8']:
+            cell = int(inp)
+            if board.board[cell // 3][cell % 3] == 0:
+                if board.PlayerX_turn:
+                    board.board_state[cell] = board.board_state[cell] + "1"
+                    board.PlayerX_turn = False
+                else:
+                    board.board_state[cell] = board.board_state[cell] + "0"
+                    board.PlayerX_turn = True
+            else:
+                print("[red]This cell is already marked.")
+        else:
+            print('[red]Invalid Input.')
