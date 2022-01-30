@@ -2,7 +2,7 @@
 
 ![](Assets/Header.jpg)
 
-Michael Kougang, Henry Atkins, Ananya Shukla, Swaraj Purohit
+[Michael Kougang](https://github.com/RoyalWeden), [Henry Atkins](https://github.com/henry-dev-atkins), [Ananya Shukla](https://github.com/ShuklaAnanya), [Swaraj Purohit](https://github.com/anomius)
 -------------------------------------------------------------
 
 ****
