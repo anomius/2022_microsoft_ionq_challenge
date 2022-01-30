@@ -23,7 +23,7 @@ Our qubit tic tac toe is the extension of Schoridnger’s cat — but instead of
    to change its state.
 4. To entangle two cells, players can apply the
    CX gate to two cells through the command
-   CX (first cell) (second cell). eg CX(4)(5).
+   CX (first cell) (second cell). e.g. CX 4 5.
 5. When a player wants to use the current state
    of the board to get results, they can measure it
    with 'm'. Warning: only play this if you think you'll win!
