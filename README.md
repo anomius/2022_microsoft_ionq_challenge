@@ -14,8 +14,8 @@ Our qubit tic tac toe is the extension of Schoridnger’s cat — but instead of
 
 ### Instructions
 ----------------------------------------------------
-0. In X's turn, X applies an X (pauli) and H (Hadamard) gate on the
-   cell they choose.
+0. In X's turn, X applies an X (pauli) and H (Hadamard) gate on the chosen
+   cell.
 1. In O's turn, O applies a H gate on the cell of choice.
 2. To select the cell to claim, type an integer (0-8) when prompted. 
    X's cells are labelled 1, and O's cells are labelled 0.
